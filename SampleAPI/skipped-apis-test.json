@@ -1,0 +1,1177 @@
+[{
+    "fintech-id": 1,
+    "fintech-name": "Transferwise",
+    "fintech-logo": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAXAB4DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3ivILjxF4h8VamRpc2oiOQSS21np88duVgRynmyyuDlmYHCj0r14MMkAgkdRnpXl+qeA9S0zUze6HLeiCGzMUK2d2kEuWmZ2Vi4I2hX6/7NdmDdNN81r9L7GNZSaVtjqPAV9qGo6Abq9vzeRtIywtNEEnj2nDJLj5SwYEZHUc11Nc14I0rUdG0P7JfxWtvGG3QW0LGRo1PJ3yH77E5JOO/wCXS98VhXt7WXLsXC/KrnJXvhK6k1fUNWtL8xXVxKCqqxiBj2IrKzqN+coCOSB2HJqH/hHNbuY5Ir6/S7it3haGG6JaK4IUGTzMcld33cjjHQiiiqWInb/gC9nEmHhzWg8aQapFZ2oVAYbRnREXILIi9u539eccCtTw/pup6cl1/aWpNeyPJmNySdq/iOM+nIGKKKmVaUlZ/kNQSdz/2Q==",
+    "apis": [{
+            "id": 11,
+            "name": "Testing Open3",
+            "version": 2,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                        "url": "https://api.sandbox.transferwise.tech/",
+                        "description": "Sandbox API. Do not send real data"
+                    },
+                    {
+                        "url": "https://ap.transferwise.com/",
+                        "description": "Production API. Contact us for integration."
+                    }
+                ],
+                "tags": [{
+                    "name": "Addresses"
+                }],
+                "paths": {
+                    "/addresses": {
+                        "get": {
+                            "tags": [
+                                "Addresses"
+                            ],
+                            "summary": "List of addresses belonging to user profile",
+                            "parameters": [{
+                                "in": "query",
+                                "name": "profile",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "description": "profileId"
+                            }],
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Successful Request",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "profile": {
+                                                        "type": "string"
+                                                    },
+                                                    "details": {
+                                                        "$ref": "#/components/schemas/Address"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "201": {
+                                    "$ref": "#/components/responses/ResourceCreated"
+                                },
+                                "400": {
+                                    "$ref": "#/components/responses/BadRequest"
+                                },
+                                "401": {
+                                    "$ref": "#/components/responses/Unauthorized"
+                                },
+                                "403": {
+                                    "$ref": "#/components/responses/Forbidden"
+                                },
+                                "404": {
+                                    "$ref": "#/components/responses/NotFound"
+                                },
+                                "408": {
+                                    "$ref": "#/components/responses/Timeout"
+                                },
+                                "422": {
+                                    "$ref": "#/components/responses/Unprocessable"
+                                },
+                                "500": {
+                                    "$ref": "#/components/responses/ServerError"
+                                }
+                            }
+                        },
+                        "post": {
+                            "tags": [
+                                "Addresses"
+                            ],
+                            "summary": "Adds address info to user profile.",
+                            "description": "List of required fields are slightly different for different countries. For example state field is required for US, CA, BR and AU addresses but not for other countries. Please look at Addresses.Requirements to figure out which fields are required to create addresses in specific country.\n",
+                            "security": [{
+                                "BearerAuth": []
+                            }],
+                            "parameters": [{
+                                "name": "profile",
+                                "in": "query",
+                                "description": "User profile id",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "required": true
+                            }],
+                            "requestBody": {
+                                "required": true,
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "properties": {
+                                                "profile": {
+                                                    "type": "string"
+                                                },
+                                                "details": {
+                                                    "$ref": "#/components/schemas/Address"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Successful Request",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "profile": {
+                                                        "type": "string"
+                                                    },
+                                                    "details": {
+                                                        "$ref": "#/components/schemas/Address"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "201": {
+                                    "$ref": "#/components/responses/ResourceCreated"
+                                },
+                                "400": {
+                                    "$ref": "#/components/responses/BadRequest"
+                                },
+                                "401": {
+                                    "$ref": "#/components/responses/Unauthorized"
+                                },
+                                "403": {
+                                    "$ref": "#/components/responses/Forbidden"
+                                },
+                                "404": {
+                                    "$ref": "#/components/responses/NotFound"
+                                },
+                                "408": {
+                                    "$ref": "#/components/responses/Timeout"
+                                },
+                                "422": {
+                                    "$ref": "#/components/responses/Unprocessable"
+                                },
+                                "500": {
+                                    "$ref": "#/components/responses/ServerError"
+                                }
+                            }
+                        }
+                    },
+                    "/addresses/{addressId}": {
+                        "get": {
+                            "tags": [
+                                "Addresses"
+                            ],
+                            "summary": "Get address info by id",
+                            "security": [{
+                                "BearerAuth": []
+                            }],
+                            "parameters": [{
+                                "in": "path",
+                                "name": "addressId",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }],
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Successful Request",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/Address"
+                                            }
+                                        }
+                                    }
+                                },
+                                "201": {
+                                    "$ref": "#/components/responses/ResourceCreated"
+                                },
+                                "400": {
+                                    "$ref": "#/components/responses/BadRequest"
+                                },
+                                "401": {
+                                    "$ref": "#/components/responses/Unauthorized"
+                                },
+                                "403": {
+                                    "$ref": "#/components/responses/Forbidden"
+                                },
+                                "404": {
+                                    "$ref": "#/components/responses/NotFound"
+                                },
+                                "408": {
+                                    "$ref": "#/components/responses/Timeout"
+                                },
+                                "422": {
+                                    "$ref": "#/components/responses/Unprocessable"
+                                },
+                                "500": {
+                                    "$ref": "#/components/responses/ServerError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "components": {
+                    "responses": {
+                        "ResourceCreated": {
+                            "description": "Resource Created"
+                        },
+                        "BadRequest": {
+                            "description": "Request messege data did not pass validation"
+                        },
+                        "Unauthorized": {
+                            "description": "Not authorized to access requested data."
+                        },
+                        "Forbidden": {
+                            "description": "Access to requested data is forbidden."
+                        },
+                        "NotFound": {
+                            "description": "Requested resource does not exist."
+                        },
+                        "Timeout": {
+                            "description": "Operation timed out."
+                        },
+                        "Unprocessable": {
+                            "description": "Request message data did not pass validation"
+                        },
+                        "ServerError": {
+                            "description": "Transferwise server error"
+                        }
+                    },
+                    "schemas": {
+                        "Address": {
+                            "properties": {
+                                "country": {
+                                    "type": "string"
+                                },
+                                "firstLine": {
+                                    "type": "string"
+                                },
+                                "postCode": {
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "type": "string"
+                                },
+                                "occupation": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        }, {
+            "id": 10,
+            "name": "Test API",
+            "version": 1,
+            "swagger": {
+                "swagger": "2.0",
+                "info": {
+                    "description": "The APIs for the TransferWise Sandbox.",
+                    "version": "1.2.1",
+                    "title": "TransferWise",
+                    "termsOfService": "https://transferwise.com",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    }
+                },
+                "host": "api.sandbox.transferwise.tech",
+                "tags": [{
+                    "name": "Payouts",
+                    "description": "Automate your payments",
+                    "externalDocs": {
+                        "description": "Find out more",
+                        "url": "https://api-docs.transferwise.com/#payouts-guide"
+                    }
+                }],
+                "schemes": ["https", "http"],
+                "paths": {
+                    "/quotes": {
+                        "post": {
+                            "tags": ["Payouts"],
+                            "summary": "The first step to a payout",
+                            "description": "Quote fetches current mid-market exchange rate that will be used for your transfer. Quote also calculates our fee and estimated delivery time.",
+                            "consumes": ["application/json"],
+                            "produces": ["application/xml", "application/json"],
+                            "parameters": [{
+                                "in": "body",
+                                "name": "body",
+                                "description": "The quote you are requesting",
+                                "required": true,
+                                "schema": {
+                                    "$ref": "#/definitions/QuoteRequest"
+                                }
+                            }],
+                            "responses": {
+                                "200": {
+                                    "description": "Use the quote id for the transfer",
+                                    "schema": {
+                                        "$ref": "#/definitions/Quote"
+                                    }
+                                },
+                                "405": {
+                                    "description": "Invalid input"
+                                }
+                            },
+                            "security": [{
+                                "BasicAuth": []
+                            }]
+                        }
+                    }
+                },
+                "securityDefinitions": {
+                    "BasicAuth": {
+                        "type": "basic"
+                    }
+                },
+                "definitions": {
+                    "QuoteRequest": {
+                        "type": "object",
+                        "properties": {
+                            "profile": {
+                                "type": "string",
+                                "description": "personal or business profile id"
+                            },
+                            "source": {
+                                "type": "string",
+                                "description": "source(send) currency code"
+                            },
+                            "target": {
+                                "type": "string",
+                                "description": "target(receive) currency code"
+                            },
+                            "rateType": {
+                                "type": "string",
+                                "description": "always use FIXED"
+                            },
+                            "targetAmount": {
+                                "type": "number",
+                                "description": "amount in target currency - not to be used with source amount"
+                            },
+                            "sourceAmount": {
+                                "type": "number",
+                                "description": "amount is source currency - not to be used with target amount"
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "external payment or internal conversion",
+                                "enum": ["BALANCE_PAYOUT", "BALANCE_CONVERSION"]
+                            }
+                        }
+                    },
+                    "Quote": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "description": "quote id"
+                            },
+                            "source": {
+                                "type": "string",
+                                "description": "source(send) currency code"
+                            },
+                            "target": {
+                                "type": "string",
+                                "description": "target(receive) currency code"
+                            },
+                            "sourceAmount": {
+                                "type": "number",
+                                "description": "amount in source currency"
+                            },
+                            "targetAmount": {
+                                "type": "number",
+                                "description": "amount in target currency"
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "quote type"
+                            },
+                            "rate": {
+                                "type": "number",
+                                "description": "exchange rate"
+                            },
+                            "createdTime": {
+                                "type": "string",
+                                "format": "datetime"
+                            },
+                            "createdByUserId": {
+                                "type": "integer"
+                            },
+                            "profile": {
+                                "type": "integer",
+                                "description": "personal or business profile id"
+                            },
+                            "rateType": {
+                                "type": "string",
+                                "description": "always use FIXED"
+                            },
+                            "deliveryEstimate": {
+                                "type": "string",
+                                "format": "datetime",
+                                "description": "assumes the tranfer will be created now"
+                            },
+                            "fee": {
+                                "type": "number",
+                                "description": "in source currency"
+                            },
+                            "allowedProfileTypes": {
+                                "type": "string",
+                                "description": "personal or business"
+                            },
+                            "guarenteedTargetAmount": {
+                                "type": "boolean",
+                                "description": ""
+                            },
+                            "ofSourceAmount": {
+                                "type": "boolean",
+                                "description": ""
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 0,
+            "name": "Addresses",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "host": "https://api.sandbox.transferwise.tech",
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "Addresses"
+                }],
+                "paths": {
+                    "/addresses": {
+                        "get": {
+                            "tags": ["Addresses"],
+                            "summary": "List of addresses belonging to user profile",
+                            "consumes": [
+                                "application/json"
+                            ],
+                            "produces": [
+                                "application/xml",
+                                "application/json"
+                            ],
+                            "security": [{
+                                "BearerAuth": []
+                            }],
+                            "parameters": [{
+                                "in": "body",
+                                "name": "profile",
+                                "schema": {
+                                    "$ref": "#/components/schemas/Address"
+                                },
+                                "description": "profileId"
+                            }],
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Successful Request",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/Address"
+                                            }
+                                        }
+                                    }
+                                },
+                                "201": {
+                                    "$ref": "#/components/responses/ResourceCreated"
+                                },
+                                "400": {
+                                    "$ref": "#/components/responses/BadRequest"
+                                },
+                                "401": {
+                                    "$ref": "#/components/responses/Unauthorized"
+                                },
+                                "403": {
+                                    "$ref": "#/components/responses/Forbidden"
+                                },
+                                "404": {
+                                    "$ref": "#/components/responses/NotFound"
+                                },
+                                "408": {
+                                    "$ref": "#/components/responses/Timeout"
+                                },
+                                "422": {
+                                    "$ref": "#/components/responses/Unprocessable"
+                                },
+                                "500": {
+                                    "$ref": "#/components/responses/ServerError"
+                                }
+                            }
+                        },
+                        "post": {
+                            "tags": ["Addresses"],
+                            "summary": "Adds address info to user profile.",
+                            "description": "List of required fields are slightly different for different countries. For example state field is required for US, CA, BR and AU addresses but not for other countries. Please look at Addresses.Requirements to figure out which fields are required to create addresses in specific country.\n",
+                            "security": [{
+                                "ApiKeyAuth": []
+                            }],
+                            "parameters": [{
+                                "name": "profile",
+                                "in": "query",
+                                "description": "User profile id",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "required": true
+                            }, {
+                                "name": "details",
+                                "in": "query",
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "country": {
+                                            "type": "string",
+                                            "description": "2 digit ISO coutnry code"
+                                        },
+                                        "firstLine": {
+                                            "type": "string",
+                                            "description": "Address line: street, house, apartment"
+                                        },
+                                        "postCode": {
+                                            "type": "string",
+                                            "description": "Zip Code"
+                                        },
+                                        "city": {
+                                            "type": "string"
+                                        },
+                                        "state": {
+                                            "type": "string"
+                                        },
+                                        "occuptation": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }],
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Successful Request",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/Address"
+                                            }
+                                        }
+                                    }
+                                },
+                                "201": {
+                                    "$ref": "#/components/responses/ResourceCreated"
+                                },
+                                "400": {
+                                    "$ref": "#/components/responses/BadRequest"
+                                },
+                                "401": {
+                                    "$ref": "#/components/responses/Unauthorized"
+                                },
+                                "403": {
+                                    "$ref": "#/components/responses/Forbidden"
+                                },
+                                "404": {
+                                    "$ref": "#/components/responses/NotFound"
+                                },
+                                "408": {
+                                    "$ref": "#/components/responses/Timeout"
+                                },
+                                "422": {
+                                    "$ref": "#/components/responses/Unprocessable"
+                                },
+                                "500": {
+                                    "$ref": "#/components/responses/ServerError"
+                                }
+                            }
+                        }
+                    },
+                    "/addresses/{addressId}": {
+                        "get": {
+                            "tags": ["Addresses"],
+                            "summary": "Get address info by id",
+                            "security": [{
+                                "BearerAuth": []
+                            }],
+                            "parameters": [{
+                                "in": "path",
+                                "name": "addressId",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }],
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Successful Request",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/components/schemas/Address"
+                                            }
+                                        }
+                                    }
+                                },
+                                "201": {
+                                    "$ref": "#/components/responses/ResourceCreated"
+                                },
+                                "400": {
+                                    "$ref": "#/components/responses/BadRequest"
+                                },
+                                "401": {
+                                    "$ref": "#/components/responses/Unauthorized"
+                                },
+                                "403": {
+                                    "$ref": "#/components/responses/Forbidden"
+                                },
+                                "404": {
+                                    "$ref": "#/components/responses/NotFound"
+                                },
+                                "408": {
+                                    "$ref": "#/components/responses/Timeout"
+                                },
+                                "422": {
+                                    "$ref": "#/components/responses/Unprocessable"
+                                },
+                                "500": {
+                                    "$ref": "#/components/responses/ServerError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "components": {
+                    "responses": {
+                        "ResourceCreated": {
+                            "description": "Resource Created"
+                        },
+                        "BadRequest": {
+                            "description": "Request messege data did not pass validation"
+                        },
+                        "Unauthorized": {
+                            "description": "Not authorized to access requested data."
+                        },
+                        "Forbidden": {
+                            "description": "Access to requested data is forbidden."
+                        },
+                        "NotFound": {
+                            "description": "Requested resource does not exist."
+                        },
+                        "Timeout": {
+                            "description": "Operation timed out."
+                        },
+                        "Unprocessable": {
+                            "description": "Request message data did not pass validation"
+                        },
+                        "ServerError": {
+                            "description": "Transferwise server error"
+                        }
+                    },
+                    "schemas": {
+                        "Address": {
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "profile": {
+                                    "type": "string"
+                                },
+                                "details": {
+                                    "type": "object",
+                                    "properties": {
+                                        "country": {
+                                            "type": "string"
+                                        },
+                                        "firstLine": {
+                                            "type": "string"
+                                        },
+                                        "postCode": {
+                                            "type": "string"
+                                        },
+                                        "city": {
+                                            "type": "string"
+                                        },
+                                        "state": {
+                                            "type": "string"
+                                        },
+                                        "occupation": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                },
+                "securityDefinitions": {
+                    "BearerAuth": {
+                        "type": "bearer"
+                    },
+                    "ApiKeyAuth": {
+                        "type": "apiKey",
+                        "in": "header",
+                        "name": "X-Api-Key"
+                    }
+                }
+            }
+        },
+        {
+            "id": 2,
+            "name": "Exchange Rates",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "Exchange Rates"
+                }],
+                "paths": {
+                    "/rates": {
+                        "get": {
+                            "tags": ["Exchange Rates"],
+                            "summary": "Fetch latest rates of all currencies",
+                            "parameters": [{
+                                "in": "query",
+                                "name": "source",
+                                "required": false,
+                                "description": "Three digit currency code.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }, {
+                                "in": "query",
+                                "name": "target",
+                                "required": false,
+                                "description": "Trhee digit currency code",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }, {
+                                "in": "query",
+                                "name": "from",
+                                "required": false,
+                                "description": "Timestamp",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "datetime"
+                                }
+                            }, {
+                                "in": "query",
+                                "name": "group",
+                                "required": false,
+                                "description": "The interval for historical prices.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }],
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Successful Request",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/ExchangeRate"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "201": {
+                                    "$ref": "#/components/responses/ResourceCreated"
+                                },
+                                "400": {
+                                    "$ref": "#/components/responses/BadRequest"
+                                },
+                                "401": {
+                                    "$ref": "#/components/responses/Unauthorized"
+                                },
+                                "403": {
+                                    "$ref": "#/components/responses/Forbidden"
+                                },
+                                "404": {
+                                    "$ref": "#/components/responses/NotFound"
+                                },
+                                "408": {
+                                    "$ref": "#/components/responses/Timeout"
+                                },
+                                "422": {
+                                    "$ref": "#/components/responses/Unprocessable"
+                                },
+                                "500": {
+                                    "$ref": "#/components/responses/ServerError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "components": {
+                    "responses": {
+                        "ResourceCreated": {
+                            "description": "Resource Created"
+                        },
+                        "BadRequest": {
+                            "description": "Request messege data did not pass validation"
+                        },
+                        "Unauthorized": {
+                            "description": "Not authorized to access requested data."
+                        },
+                        "Forbidden": {
+                            "description": "Access to requested data is forbidden."
+                        },
+                        "NotFound": {
+                            "description": "Requested resource does not exist."
+                        },
+                        "Timeout": {
+                            "description": "Operation timed out."
+                        },
+                        "Unprocessable": {
+                            "description": "Request message data did not pass validation"
+                        },
+                        "ServerError": {
+                            "description": "Transferwise server error"
+                        }
+                    },
+                    "schemas": {
+                        "ExchangeRate": {
+                            "properties": {
+                                "rate": {
+                                    "type": "number",
+                                    "example": 1.66
+                                },
+                                "source": {
+                                    "type": "string",
+                                    "example": "USD"
+                                },
+                                "target": {
+                                    "type": "string",
+                                    "example": "EUR"
+                                },
+                                "time": {
+                                    "type": "string",
+                                    "format": "datetime"
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 3,
+            "name": "\ud83d\udd12 Quotes",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "Quotes"
+                }],
+                "paths": {
+                    "/contact-for-access": {
+                        "get": {
+                            "tags": ["Quotes"],
+                            "summary": "Contact us for access to this API",
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Received."
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 5,
+            "name": "\ud83d\udd12 Simulations",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "Simulations"
+                }],
+                "paths": {
+                    "/contact-for-access": {
+                        "get": {
+                            "tags": ["Simulations"],
+                            "summary": "Contact us for access to this API",
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Received."
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 6,
+            "name": "\ud83d\udd12 Terms and Conditions",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "Terms and Conditions"
+                }],
+                "paths": {
+                    "/contact-for-access": {
+                        "get": {
+                            "tags": ["Terms and Conditions"],
+                            "summary": "Contact us for access to this API",
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Received."
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 7,
+            "name": "\ud83d\udd12 Transfers",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "Transfers"
+                }],
+                "paths": {
+                    "/contact-for-access": {
+                        "get": {
+                            "tags": ["Transfers"],
+                            "summary": "Contact us for access to this API",
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Received."
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 8,
+            "name": "\ud83d\udd12 User Profiles",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "User Profiles"
+                }],
+                "paths": {
+                    "/contact-for-access": {
+                        "get": {
+                            "tags": ["User Profiles"],
+                            "summary": "Contact us for access to this API",
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Received."
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 9,
+            "name": "\ud83d\udd12 Users",
+            "version": 1,
+            "swagger": {
+                "openapi": "3.0.0",
+                "info": {
+                    "title": "TransferWise",
+                    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+                    "termsOfService": "https://transferwise.com/terms-and-conditions",
+                    "contact": {
+                        "email": "bizdev@transferwise.com"
+                    },
+                    "version": "1.0.0"
+                },
+                "servers": [{
+                    "url": "https://api.sandbox.transferwise.tech/"
+                }],
+                "tags": [{
+                    "name": "Users"
+                }],
+                "paths": {
+                    "/contact-for-access": {
+                        "get": {
+                            "tags": ["Users"],
+                            "summary": "Contact us for access to this API",
+                            "responses": {
+                                "200": {
+                                    "description": "OK. Received."
+                                }
+                            }
+                        }
+                    },
+                    "securitySchemes": {
+                        "BearerAuth": {
+                            "type": "http",
+                            "scheme": "bearer"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}]
