@@ -1,0 +1,136 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "4f389ea4-7aa0-487e-9e35-fcd91bef97dd": {
+        "id": "4f389ea4-7aa0-487e-9e35-fcd91bef97dd",
+        "parent": null,
+        "name": "SampleAPI",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "ada29f28-4458-475f-a2a6-ad5d3327dbd3",
+          "7c5dbd49-fcce-4d17-8d2c-5ea54fa0f55f"
+        ],
+        "isRemovable": false,
+        "filePath": "SampleAPI"
+      },
+      "ada29f28-4458-475f-a2a6-ad5d3327dbd3": {
+        "id": "ada29f28-4458-475f-a2a6-ad5d3327dbd3",
+        "parent": "4f389ea4-7aa0-487e-9e35-fcd91bef97dd",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "SampleAPI/lambda.js",
+        "code": "let api = require('./api.json');\n\nexports.handler = function(event, context, callback) {\n\n    console.log(api);\n    \n    callback(null, api);\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "apigusEast1TestAPIsApiget",
+            "config": {}
+          }
+        ],
+        "testCases": {
+          "12702ad0-bf9a-421e-be22-d56615eead79": {
+            "id": "12702ad0-bf9a-421e-be22-d56615eead79",
+            "name": "Unnamed event",
+            "functionId": "ada29f28-4458-475f-a2a6-ad5d3327dbd3",
+            "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
+          }
+        }
+      },
+      "7c5dbd49-fcce-4d17-8d2c-5ea54fa0f55f": {
+        "id": "7c5dbd49-fcce-4d17-8d2c-5ea54fa0f55f",
+        "parent": "4f389ea4-7aa0-487e-9e35-fcd91bef97dd",
+        "name": "api.json",
+        "type": "JSON_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "SampleAPI/api.json",
+        "code": "{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"TransferWise\",\n    \"description\": \"Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.\",\n    \"termsOfService\": \"https://transferwise.com/terms-and-conditions\",\n    \"contact\": {\n      \"email\": \"bizdev@transferwise.com\"\n    },\n    \"version\": \"1.0.0\"\n  },\n  \"servers\": [\n    {\n      \"url\": \"https://api.sandbox.transferwise.tech/\",\n      \"description\": \"Sandbox API. Do not send real data\"\n    },\n    {\n      \"url\": \"https://ap.transferwise.com/\",\n      \"description\": \"Production API. Contact us for integration.\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"Addresses\"\n    }\n  ],\n  \"paths\": {\n    \"/addresses\": {\n      \"get\": {\n        \"tags\": [\n          \"Addresses\"\n        ],\n        \"summary\": \"List of addresses belonging to user profile\",\n        \"parameters\": [\n          {\n            \"in\": \"query\",\n            \"name\": \"profile\",\n            \"schema\": {\n              \"type\": \"string\"\n            },\n            \"description\": \"profileId\"\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"OK. Successful Request\",\n            \"content\": {\n              \"application/json\": {\n                \"schema\": {\n                  \"properties\": {\n                    \"id\": {\n                      \"type\": \"string\"\n                    },\n                    \"profile\": {\n                      \"type\": \"string\"\n                    },\n                    \"details\": {\n                      \"$ref\": \"#/components/schemas/Address\"\n                    }\n                  }\n                }\n              }\n            }\n          },\n          \"201\": {\n            \"$ref\": \"#/components/responses/ResourceCreated\"\n          },\n          \"400\": {\n            \"$ref\": \"#/components/responses/BadRequest\"\n          },\n          \"401\": {\n            \"$ref\": \"#/components/responses/Unauthorized\"\n          },\n          \"403\": {\n            \"$ref\": \"#/components/responses/Forbidden\"\n          },\n          \"404\": {\n            \"$ref\": \"#/components/responses/NotFound\"\n          },\n          \"408\": {\n            \"$ref\": \"#/components/responses/Timeout\"\n          },\n          \"422\": {\n            \"$ref\": \"#/components/responses/Unprocessable\"\n          },\n          \"500\": {\n            \"$ref\": \"#/components/responses/ServerError\"\n          }\n        }\n      },\n      \"post\": {\n        \"tags\": [\n          \"Addresses\"\n        ],\n        \"summary\": \"Adds address info to user profile.\",\n        \"description\": \"List of required fields are slightly different for different countries. For example state field is required for US, CA, BR and AU addresses but not for other countries. Please look at Addresses.Requirements to figure out which fields are required to create addresses in specific country.\\n\",\n        \"security\": [\n          {\n            \"BearerAuth\": []\n          }\n        ],\n        \"parameters\": [\n          {\n            \"name\": \"profile\",\n            \"in\": \"query\",\n            \"description\": \"User profile id\",\n            \"schema\": {\n              \"type\": \"string\"\n            },\n            \"required\": true\n          }\n        ],\n        \"requestBody\": {\n          \"required\": true,\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"properties\": {\n                  \"profile\": {\n                    \"type\": \"string\"\n                  },\n                  \"details\": {\n                    \"$ref\": \"#/components/schemas/Address\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"OK. Successful Request\",\n            \"content\": {\n              \"application/json\": {\n                \"schema\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"id\": {\n                      \"type\": \"string\"\n                    },\n                    \"profile\": {\n                      \"type\": \"string\"\n                    },\n                    \"details\": {\n                      \"$ref\": \"#/components/schemas/Address\"\n                    }\n                  }\n                }\n              }\n            }\n          },\n          \"201\": {\n            \"$ref\": \"#/components/responses/ResourceCreated\"\n          },\n          \"400\": {\n            \"$ref\": \"#/components/responses/BadRequest\"\n          },\n          \"401\": {\n            \"$ref\": \"#/components/responses/Unauthorized\"\n          },\n          \"403\": {\n            \"$ref\": \"#/components/responses/Forbidden\"\n          },\n          \"404\": {\n            \"$ref\": \"#/components/responses/NotFound\"\n          },\n          \"408\": {\n            \"$ref\": \"#/components/responses/Timeout\"\n          },\n          \"422\": {\n            \"$ref\": \"#/components/responses/Unprocessable\"\n          },\n          \"500\": {\n            \"$ref\": \"#/components/responses/ServerError\"\n          }\n        }\n      }\n    },\n    \"/addresses/{addressId}\": {\n      \"get\": {\n        \"tags\": [\n          \"Addresses\"\n        ],\n        \"summary\": \"Get address info by id\",\n        \"security\": [\n          {\n            \"BearerAuth\": []\n          }\n        ],\n        \"parameters\": [\n          {\n            \"in\": \"path\",\n            \"name\": \"addressId\",\n            \"required\": true,\n            \"schema\": {\n              \"type\": \"string\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"OK. Successful Request\",\n            \"content\": {\n              \"application/json\": {\n                \"schema\": {\n                  \"$ref\": \"#/components/schemas/Address\"\n                }\n              }\n            }\n          },\n          \"201\": {\n            \"$ref\": \"#/components/responses/ResourceCreated\"\n          },\n          \"400\": {\n            \"$ref\": \"#/components/responses/BadRequest\"\n          },\n          \"401\": {\n            \"$ref\": \"#/components/responses/Unauthorized\"\n          },\n          \"403\": {\n            \"$ref\": \"#/components/responses/Forbidden\"\n          },\n          \"404\": {\n            \"$ref\": \"#/components/responses/NotFound\"\n          },\n          \"408\": {\n            \"$ref\": \"#/components/responses/Timeout\"\n          },\n          \"422\": {\n            \"$ref\": \"#/components/responses/Unprocessable\"\n          },\n          \"500\": {\n            \"$ref\": \"#/components/responses/ServerError\"\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"responses\": {\n      \"ResourceCreated\": {\n        \"description\": \"Resource Created\"\n      },\n      \"BadRequest\": {\n        \"description\": \"Request messege data did not pass validation\"\n      },\n      \"Unauthorized\": {\n        \"description\": \"Not authorized to access requested data.\"\n      },\n      \"Forbidden\": {\n        \"description\": \"Access to requested data is forbidden.\"\n      },\n      \"NotFound\": {\n        \"description\": \"Requested resource does not exist.\"\n      },\n      \"Timeout\": {\n        \"description\": \"Operation timed out.\"\n      },\n      \"Unprocessable\": {\n        \"description\": \"Request message data did not pass validation\"\n      },\n      \"ServerError\": {\n        \"description\": \"Transferwise server error\"\n      }\n    },\n    \"schemas\": {\n      \"Address\": {\n        \"properties\": {\n          \"country\": {\n            \"type\": \"string\"\n          },\n          \"firstLine\": {\n            \"type\": \"string\"\n          },\n          \"postCode\": {\n            \"type\": \"string\"\n          },\n          \"city\": {\n            \"type\": \"string\"\n          },\n          \"state\": {\n            \"type\": \"string\"\n          },\n          \"occupation\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    \"securitySchemes\": {\n      \"BearerAuth\": {\n        \"type\": \"http\",\n        \"scheme\": \"bearer\"\n      }\n    }\n  }\n}\n"
+      }
+    },
+    "deletedFiles": [],
+    "rootNode": "4f389ea4-7aa0-487e-9e35-fcd91bef97dd",
+    "openFiles": [
+      "ada29f28-4458-475f-a2a6-ad5d3327dbd3",
+      "7c5dbd49-fcce-4d17-8d2c-5ea54fa0f55f"
+    ],
+    "currentFileId": "ada29f28-4458-475f-a2a6-ad5d3327dbd3",
+    "resources": {
+      "apigusEast1TestAPIsApiget": {
+        "name": "apigusEast1TestAPIsApiget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 1,
+          "apiName": "TestAPI",
+          "apiId": "0itznun7w3",
+          "endpointType": "EDGE",
+          "rootResourceId": "h2lelj6j7k",
+          "existingResources": {
+            "/MyLambda": "98nqbj",
+            "/": "h2lelj6j7k",
+            "/newchange/test": "k6pdhn",
+            "/newchange": "q1ox7l",
+            "/testWithSlash": "q4m4g1",
+            "/testtwospeciallambda": "q4szm3",
+            "/testtwospecialkumutest": "wey3lk"
+          },
+          "resourceMode": 0,
+          "resourceName": "s-api",
+          "resourcePath": "/s-api",
+          "restMethod": "GET",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 1,
+          "stageName": "Test",
+          "stageDeploymentId": "opdupo",
+          "mode": 1
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": {}
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "SampleAPI",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1572593592767
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "branches": [],
+      "name": "SampleAPI",
+      "url": "https://github.com/zgma-test/SampleAPI"
+    }
+  }
+}

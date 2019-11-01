@@ -1,0 +1,297 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TransferWise",
+    "description": "Welcome to the TransferWise API. You can explore the different ways to use our API and choose the right one for you below.",
+    "termsOfService": "https://transferwise.com/terms-and-conditions",
+    "contact": {
+      "email": "bizdev@transferwise.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.sandbox.transferwise.tech/",
+      "description": "Sandbox API. Do not send real data"
+    },
+    {
+      "url": "https://ap.transferwise.com/",
+      "description": "Production API. Contact us for integration."
+    }
+  ],
+  "tags": [
+    {
+      "name": "Addresses"
+    }
+  ],
+  "paths": {
+    "/addresses": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "List of addresses belonging to user profile",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "profile",
+            "schema": {
+              "type": "string"
+            },
+            "description": "profileId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successful Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "profile": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "$ref": "#/components/schemas/Address"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "$ref": "#/components/responses/ResourceCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "408": {
+            "$ref": "#/components/responses/Timeout"
+          },
+          "422": {
+            "$ref": "#/components/responses/Unprocessable"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Adds address info to user profile.",
+        "description": "List of required fields are slightly different for different countries. For example state field is required for US, CA, BR and AU addresses but not for other countries. Please look at Addresses.Requirements to figure out which fields are required to create addresses in specific country.\n",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "query",
+            "description": "User profile id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "profile": {
+                    "type": "string"
+                  },
+                  "details": {
+                    "$ref": "#/components/schemas/Address"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Successful Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "profile": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "$ref": "#/components/schemas/Address"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "$ref": "#/components/responses/ResourceCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "408": {
+            "$ref": "#/components/responses/Timeout"
+          },
+          "422": {
+            "$ref": "#/components/responses/Unprocessable"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/addresses/{addressId}": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Get address info by id",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successful Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            }
+          },
+          "201": {
+            "$ref": "#/components/responses/ResourceCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "408": {
+            "$ref": "#/components/responses/Timeout"
+          },
+          "422": {
+            "$ref": "#/components/responses/Unprocessable"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "ResourceCreated": {
+        "description": "Resource Created"
+      },
+      "BadRequest": {
+        "description": "Request messege data did not pass validation"
+      },
+      "Unauthorized": {
+        "description": "Not authorized to access requested data."
+      },
+      "Forbidden": {
+        "description": "Access to requested data is forbidden."
+      },
+      "NotFound": {
+        "description": "Requested resource does not exist."
+      },
+      "Timeout": {
+        "description": "Operation timed out."
+      },
+      "Unprocessable": {
+        "description": "Request message data did not pass validation"
+      },
+      "ServerError": {
+        "description": "Transferwise server error"
+      }
+    },
+    "schemas": {
+      "Address": {
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "firstLine": {
+            "type": "string"
+          },
+          "postCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
