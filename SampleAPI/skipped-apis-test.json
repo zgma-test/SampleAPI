@@ -284,8 +284,8 @@
                     },
                     "securitySchemes": {
                         "BearerAuth": {
-                            "type": "http",
-                            "scheme": "bearer"
+                            "type": "bearer",
+                            "scheme": "http"
                         }
                     }
                 }
